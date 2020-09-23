@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 //https://programmers.co.kr/learn/courses/30/lessons/42748?language=java
-//���α׷��ӽ� �ڵ��׽�Ʈ ���� > ���� > K��° �� 
+//프로그래머스 코딩테스트 연습 > 정렬 > K번째 수 
 
 public class KthNumber {
 	
@@ -22,38 +22,33 @@ public class KthNumber {
 
 class Solution {
     public int[] solution(int[] array, int[][] commands) {
-        int[] answer = {};
+        int[] answer = new int[commands.length];
+        int index = 0;
         
-        ArrayList<Integer> ans = new ArrayList<Integer>();
-        
-        
+        //1) for-each로 각 커맨드 분리
         for (int[] c : commands) {
         	//System.out.println(Arrays.toString(i));
+        	
+        	//2) 잘라낸 배열을 저장할 임시 배열 선언
 			int len = c[1] - c[0] + 1;
 			int[] temp = new int[len];
 			
 			for(int i = 0; i < len; i++) {
-				temp[i] = array[i + c[0] - 1];
+				temp[i] = array[i + c[0] - 1]; //3) c[0]가 오프셋이고 0부터 len까지 임시배열에 넣는다
 			}
 			//System.out.println(Arrays.toString(temp));
 			
-			Arrays.sort(temp);
+			Arrays.sort(temp); //4) 잘라낸 배열을 정렬
 			//System.out.println(Arrays.toString(temp));
-			ans.add(temp[c[2] - 1]);
+			answer[index++] = temp[c[2] - 1];
 			
 			//System.out.println(ans.toString());
 		}
-        
-//        answer = new int[ans.size()];
-//        for(int i = 0; i < ans.size(); i++) {
-//        	answer[i] = ans.get(i).intValue();
-//        }
-        answer = convertIntegers(ans);
-        
+
         return answer;
     }
     
-    //Integer����Ʈ�� int�迭�� ��ȯ
+    //Integer리스트를 int배열로 변환
     public static int[] convertIntegers(List<Integer> integers)
     {
         int[] ret = new int[integers.size()];
